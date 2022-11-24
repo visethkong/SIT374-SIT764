@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <meta name="viewport" content="width-device-width, initial-scale=1" />
+    <!-- dialogflow style bootsrap -->
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <style>
+      .text-center {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+      }
+      df-messenger {
+            --df-messenger-bot-message: #bdfcbf;
+            --df-messenger-button-titlebar-color: #7ec472;
+            --df-messenger-chat-background-color: #fafafa;
+            --df-messenger-font-color: black;
+            --df-messenger-send-icon: #7ec472;
+            --df-messenger-user-message: #7ec472;
+            }  
+    </style>
+
+    <!-- Jquery CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        //To minimise the height of chatbox
+        $(document).ready(function() {
+            window.addEventListener('dfMessengerLoaded', function (event) {
+            $r1 = document.querySelector("df-messenger");
+            $r2 = $r1.shadowRoot.querySelector("df-messenger-chat");
+            $r3 = $r2.shadowRoot.querySelector("df-messenger-user-input"); //for other mods
+            var sheet = new CSSStyleSheet;
+            // manage box height from here
+            sheet.replaceSync( `div.chat-wrapper[opened="true"] { height: 450px }`);
+            $r2.shadowRoot.adoptedStyleSheets = [ sheet ];
+            });
+        });
+    </script>
+    
+  </head>
+  <body>
+    <!-- center text in webpage -->
+    <div class="text-center">
+      <h1>Chatbot Integration</h1>
+    </div>
+    <!-- This is the main code for chatbot  -->
+    <!-- we can add more fields, refer: https://cloud.google.com/dialogflow/es/docs/integrations/dialogflow-messenger -->
+    <df-messenger
+      intent="WELCOME"
+      chat-title="dialogflow-demo"
+      agent-id="c9f5b275-c94b-4c7e-8ac2-6a5d782be906"
+      language-code="en"
+    ></df-messenger>
+  </body>
+</html>
